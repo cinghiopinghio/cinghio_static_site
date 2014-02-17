@@ -2,6 +2,7 @@
 // IMPORTS
 //
 @import "compass/reset";
+@import "susy";
 
 
 //
@@ -29,3 +30,47 @@ $pygments-fg: #F8F8F2;
 // CLEAR FIX
 
 // VENDOR PREFIXES
+
+// SUSY
+$total-width: 1000px;
+$total-columns: 12;
+$col-width-abs: 65px;
+$column-width: percentage($col-width-abs / $total-width);
+$gutter-width-abs: 10px;
+$gutter-width: percentage($gutter-width-abs / $total-width);
+
+.page {
+  // page acts as a container for our grid.
+  @include container;
+
+  // header and footer are full-width by default.
+  header, footer { clear: both; }
+
+  // nav spans 3 columns of total 12.
+  nav { @include span-columns(3,12); }
+
+  .content {
+    // content spans the final (omega) 9 columns of 12.
+    @include span-columns(9 omega,12);
+
+    // main content spans 6 of those 9 columns.
+    .main { @include span-columns(6,9); }
+
+    // secondary content spans the final 3 (omega) of 9 columns.
+    .secondary { @include span-columns(3 omega,9); }
+  }
+}
+
+body {
+  max-width:1000px;
+  margin:auto;
+}
+
+img, embed, object, video{
+  max-width: 100%;
+}
+
+svg{
+  margin: auto;
+  display:block;
+}
