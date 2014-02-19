@@ -2,6 +2,7 @@ BUILD_DIR='_build/'
 GH_DIR='../cinghiopinghio.github.io'
 
 try:
+	cd ./_assets/css/_sass;	compass compile
 	mynt gen -f $(BUILD_DIR)
 
 clean:
