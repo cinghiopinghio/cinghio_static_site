@@ -32,14 +32,16 @@ $pygments-fg: #F8F8F2;
 // VENDOR PREFIXES
 
 // SUSY
+// dimensions in px to refer
 $total-width: 1000px;
-$total-columns: 12;
 $col-width-abs: 65px;
-$column-width: percentage($col-width-abs / $total-width);
 $gutter-width-abs: 10px;
+// actual fluid column dimensions
+$total-columns: 12;
+$column-width: percentage($col-width-abs / $total-width);
 $gutter-width: percentage($gutter-width-abs / $total-width);
 
-.page {
+body {
   // page acts as a container for our grid.
   @include container;
 
@@ -49,15 +51,15 @@ $gutter-width: percentage($gutter-width-abs / $total-width);
   // nav spans 3 columns of total 12.
   nav { @include span-columns(3,12); }
 
-  .content {
+  main {
     // content spans the final (omega) 9 columns of 12.
     @include span-columns(9 omega,12);
 
     // main content spans 6 of those 9 columns.
-    .main { @include span-columns(6,9); }
+    article { @include span-columns(6,9); }
 
     // secondary content spans the final 3 (omega) of 9 columns.
-    .secondary { @include span-columns(3 omega,9); }
+    aside { @include span-columns(3 omega,9); }
   }
 }
 
@@ -73,4 +75,11 @@ img, embed, object, video{
 svg{
   margin: auto;
   display:block;
+}
+
+h1{
+  font-family: Sans;
+  font-size:150%;
+  background-color: #ccc;
+  padding: 10px;
 }
