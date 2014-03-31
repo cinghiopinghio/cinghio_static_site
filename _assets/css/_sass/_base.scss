@@ -10,16 +10,8 @@
 //
 
 // COLORS
-$bg-d: #222222;
-$bg: #272727;
-$sbg: #1A1A1A;
-$sbg-l: #1F1F1F;
-$fg-d: #A6A6A6;
-$fg: #D9D9D9;
-$fg-l: #FFFFFF;
-$hlt: #A6CA48;
-$hlt-l: #E6DB74;
-$pygments-fg: #F8F8F2;
+$white: #ffffff;
+$color-title-bg: #ccccdd;
 
 // DIMENSIONS
 
@@ -32,45 +24,15 @@ $pygments-fg: #F8F8F2;
 // VENDOR PREFIXES
 
 // SUSY
-// dimensions in px to refer
-$total-width: 1000px;
-$col-width-abs: 65px;
-$gutter-width-abs: 10px;
-// actual fluid column dimensions
-$total-columns: 12;
-$column-width: percentage($col-width-abs / $total-width);
-$gutter-width: percentage($gutter-width-abs / $total-width);
+$susy: (
+  columns: 12,  // The number of columns in your grid
+  gutters: 1/4, // The size of a gutter in relation to a single column
+);
 
-body {
-  // page acts as a container for our grid.
-  @include container;
+body { @include container(60em); }
+aside { @include span(3); }
+main { @include span(9 at 4); }
 
-  // header and footer are full-width by default.
-  header, footer { clear: both; }
-
-  // nav spans 3 columns of total 12.
-  nav { @include span-columns(3,12); }
-
-  main {
-    // content spans the final (omega) 9 columns of 12.
-    @include span-columns(9 omega,12);
-
-    // main content spans 6 of those 9 columns.
-    article { @include span-columns(6,9); }
-
-    // secondary content spans the final 3 (omega) of 9 columns.
-    aside { @include span-columns(3 omega,9); }
-  }
-}
-
-body {
-  max-width:1000px;
-  margin:auto;
-}
-
-img, embed, object, video{
-  max-width: 100%;
-}
 
 svg{
   margin: auto;
@@ -80,6 +42,11 @@ svg{
 h1{
   font-family: Sans;
   font-size:150%;
-  background-color: #ccc;
+  background-color: $color-title-bg;
   padding: 10px;
+}
+
+article{
+  clear:both;
+  padding-top:1em;
 }
