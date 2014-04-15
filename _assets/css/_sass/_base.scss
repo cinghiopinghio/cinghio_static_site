@@ -29,9 +29,87 @@ $susy: (
   gutters: 1/4, // The size of a gutter in relation to a single column
 );
 
-body { @include container(60em); }
+header {
+  width:100%;
+  background-color:green;
+  padding: 0.5em;
+}
+main { @include container(40em); }
 aside { @include span(3); }
-main { @include span(9 at 4); }
+article { @include span(9 at 4); }
+
+// Vertical rythm
+
+@import "compass/typography/vertical_rhythm";
+$base-font-size: 20px;
+$base-line-height: 32px;
+$rhythm-unit: "rem";
+$rem-with-px-fallback: false;
+@include establish-baseline;
+
+@function map-fetch($map, $keys) {
+  $key: nth($keys, 1);
+  $length: length($keys);
+  $value: map-get($map, $key);
+  @if ($length > 1) {
+    $rest: ();
+    @for $i from 2 through $length {
+      $rest: append($rest, nth($keys, $i))
+    }
+    @return map-fetch($value, $rest)
+  } @else {
+    @return $value;
+  }
+}
+
+@mixin type-scale($scale, $map: $type-scale) {
+  $font-size: map-fetch($map, $scale font-size);
+  $base-lines: map-fetch($map, $scale base-lines);
+  @include adjust-font-size-to($font-size, $base-lines);
+}
+
+$type-scale: (
+  tiny: (
+    font-size: 13px,
+    base-lines: 0.5
+  ),
+  small: (
+    font-size: 16px,
+    base-lines: 0.75
+   ),
+  base: (
+   font-size: $base-font-size,
+   base-lines: 1
+  ),
+  medium: (
+    font-size: 25px,
+    base-lines: 1
+  ),
+  large: (
+    font-size: 31px,
+    base-lines: 1
+  ),
+  xlarge: (
+    font-size: 39px,
+    base-lines: 1.5
+  ),
+  xxlarge: (
+    font-size: 49px,
+    base-lines: 2 
+  )
+);
+
+h1 {
+  @include type-scale(xxlarge);
+}
+h2 {
+  @include type-scale(xlarge);
+}
+small {
+  @include type-scale(small);
+}
+
+
 
 
 svg{
@@ -41,7 +119,7 @@ svg{
 
 h1{
   font-family: Sans;
-  font-size:150%;
+//  font-size:150%;
   background-color: $color-title-bg;
   padding: 10px;
 }
